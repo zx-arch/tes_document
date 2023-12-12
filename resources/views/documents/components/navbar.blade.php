@@ -5,13 +5,17 @@
             <i class="bx bxs-dashboard"></i>
             <span class="mx-2">Dashboard</span>
         </a>
-        <a href="{{ url('pembatalan_transaksi') }}" class="nav-link">
+        <a href="{{ url('upload') }}" class="nav-link">
+            <i class='bx bx-upload'></i>
+            <span class="mx-2">Upload</span>
+        </a>
+        {{-- <a href="{{ url('pembatalan_transaksi') }}" class="nav-link">
             <i class='bx bxs-file-blank'></i>
             <span class="mx-2">Pembatalan Transaksi</span>
-        </a> <br>
-        <a href="{{ url('trash') }}" class="nav-link">
-            <i class='bx bx-trash'></i>
-            <span class="mx-2">Trash</span>
         </a>
+        <a href="{{ url('surat_pemesanan') }}" class="nav-link">
+            <i class='bx bxs-file-blank'></i>
+            <span class="mx-2">Surat Pemesanan</span>
+        </a> --}}
     </ul>
 </div>
