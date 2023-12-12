@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePembatalanTransaksi extends Migration
+class CreateUserDocument extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePembatalanTransaksi extends Migration
      */
     public function up()
     {
-        Schema::create('pembatalan_transaksi', function (Blueprint $table) {
+        Schema::create('user_document', function (Blueprint $table) {
             $table->id();
             $table->string('username', 50)->nullable(false);
-            $table->string('kode_document', 20)->nullable(false);
             $table->string('nama_document', 100)->nullable(false);
+            $table->string('jenis_document', 100)->nullable(false);
             $table->binary('file')->default(null);
             $table->timestamps();
             $table->softDeletes();
@@ -31,6 +31,6 @@ class CreatePembatalanTransaksi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembatalan_transaksi');
+        Schema::dropIfExists('user_document');
     }
 }

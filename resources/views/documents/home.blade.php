@@ -12,7 +12,7 @@
 
                     <li class="list-group-item"><a href="{{ url('pembatalan_transaksi/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Surat Kesepakatan Pembatalan Transaksi</a></li>
 
-                    <li class="list-group-item"><a href="{{url('surat_pemesanan')}}">Surat Pemesanan</a></li>
+                    <li class="list-group-item"><a href="{{url('surat_pemesanan/generate-pdf')}}" target="_blank" rel="noopener noreferrer">Surat Pemesanan</a></li>
                 </ul>
             </div>
         </div>

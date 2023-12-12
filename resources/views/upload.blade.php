@@ -21,7 +21,7 @@
                                 <div class="mb-1">
                                     <select class="form-select" aria-label="Default select example" name="select_form" required>
                                         <option value="" disabled selected>Pilih Jenis Document</option>
-                                        <option value="skpt">Surat Kesepakatan Pembatalan Transaksi</option>
+                                        <option value="Surat Kesepakatan Pembatalan Transaksi">Surat Kesepakatan Pembatalan Transaksi</option>
                                         <option value="surat_pemesanan">Surat Pemesanan</option>
                                     </select><br>
 
@@ -39,7 +39,7 @@
                                     <p class="text-danger fw-bold">{{Session::get('size_invalid')}}</p>
                                 @endif
 
-                                <button type="submit" class="btn btn-primary mb-2">Upload</button>
+                                <button type="submit" class="btn-submit btn btn-primary mb-2" style="display: block;">Upload</button>
                                 <br>
                                 <span>* file harus PDF</span><br>
                                 <span>* max ukuran upload 300 KB</span><br>
@@ -49,6 +49,10 @@
                                 <p class="text-success fw-bold mt-2">{{ Session::get('add_document_success') }}</p>
                             @elseif (Session::has('update_document_success'))
                                 <p class="text-warning fw-bold mt-2">{{ Session::get('update_document_success') }}</p>
+                            @elseif (Session::has('add_size_invalid'))
+                                <p class="text-warning fw-bold mt-2">{{ Session::get('add_size_invalid') }}</p>
+                            @elseif (Session::has('add_type_invalid'))
+                                <p class="text-warning fw-bold mt-2">{{ Session::get('add_type_invalid') }}</p>
                             @endif
                         </div>
                     </div>
@@ -79,6 +83,7 @@
                     filename.style.display = 'block';
                     filename.innerHTML = selectedFile.name;
                     pdfPreview.src = "{{ asset('img/pdf_icon.png')}}";
+                    document.querySelector('.btn-submit').style.display = 'block';
                 };
                 reader.readAsDataURL(selectedFile);
             } else {
@@ -86,6 +91,7 @@
                 filename.classList.add('text-danger');
                 filename.style.fontWeight = 'bold';
                 filename.innerHTML = 'Ukuran PDF minimal 300 KB';
+                document.querySelector('.btn-submit').style.display = 'none';
             }
         } else {
             // Menyembunyikan pratinjau jika file bukan PDF
@@ -94,6 +100,7 @@
             filename.classList.add('text-danger');
             filename.style.fontWeight = 'bold';
             filename.innerHTML = 'Jenis file tidak diijinkan';
+            document.querySelector('.btn-submit').style.display = 'none';
         }
     });
 

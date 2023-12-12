@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PembatalanTransaksiModel;
+use App\Models\UserDocumentModel;
 use Illuminate\Database\QueryException;
 
 use Illuminate\Http\Request;
@@ -18,21 +19,22 @@ class UploadController extends Controller
                 try {
                     $fileContent = file_get_contents($file->getRealPath());
 
-                    if ($request->select_form == 'skpt') {
+                    if ($request->select_form == 'Surat Kesepakatan Pembatalan Transaksi') {
                         $username = 'user_a';
-                        $skptDocuments = PembatalanTransaksiModel::getDocumentsForUser($username);
+                        $skptDocuments = UserDocumentModel::getSKPTDocumentsForUser($username, $request->select_form);
                         if (sizeof($skptDocuments) == 0) {
                             // Menyimpan data ke dalam database
-                            PembatalanTransaksiModel::create([
+                            UserDocumentModel::create([
                                 'username' => 'user_a',
+                                'jenis_document' => $request->select_form,
                                 'nama_document' => $file->getClientOriginalName(),
                                 'file' => $fileContent,
                             ]);
                             return redirect('/upload')->with('add_document_success', 'Berhasil menambahkan document');
                         } else {
                             try {
-                                PembatalanTransaksiModel::where('id', $request->id)
-                                    ->where('kode_document', $request->kode_document)
+                                UserDocumentModel::where('username', 'user_a')
+                                    ->where('jenis_document', $request->select_form)
                                     ->update([
                                         'nama_document' => $file->getClientOriginalName(),
                                         'file' => file_get_contents($file->getRealPath())
@@ -52,7 +54,7 @@ class UploadController extends Controller
                     dd($errorInfo);
                 }
             } else {
-                return redirect('/upload')->with('add_size_invalid', 'Ukuran PDF minimal 4 MB');
+                return redirect('/upload')->with('add_size_invalid', 'Ukuran PDF minimal 300 KB');
             }
         } else {
             return redirect('/upload')->with('add_type_invalid', 'Jenis file tidak diijinkan');

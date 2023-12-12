@@ -9,6 +9,10 @@
             <i class='bx bx-upload'></i>
             <span class="mx-2">Upload</span>
         </a>
+        <a href="{{ url('history') }}" class="nav-link">
+            <i class='bx bx-history'></i>
+            <span class="mx-2">History</span>
+        </a>
         {{-- <a href="{{ url('pembatalan_transaksi') }}" class="nav-link">
             <i class='bx bxs-file-blank'></i>
             <span class="mx-2">Pembatalan Transaksi</span>
