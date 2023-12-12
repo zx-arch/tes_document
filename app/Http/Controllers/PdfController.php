@@ -27,41 +27,45 @@ class PdfController extends Controller
 
 
         $pdf->Cell(25, 8, 'Pada hari ini ');
-        $pdf->TextField('field_hari', 25, 8);
+        $pdf->TextField('field_hari', 25, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
         $pdf->Cell(20, 8, ' tanggal');
-        $pdf->TextField('field_tgl', 45, 8);
+        $pdf->TextField('field_tgl', 45, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => 'format: 2023-01-01'));
         $pdf->SetFillColor(255, 255, 200);
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
         $pdf->Cell(25, 8, 'bertempat di ');
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->TextField('field_tmpt', 80, 8);
+        $pdf->TextField('field_tmpt', 80, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Cell(70, 8, ' yang bertanda tangan di bawah ini: ');
         $pdf->Ln(15); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(40, 8, 'Nama                      : ');
-        $pdf->TextField('field_nm_satdik', 60, 8);
+        $pdf->TextField('field_nm_satdik', 60, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(40, 8, 'Tugas / Jabatan       : ');
-        $pdf->TextField('field_tgs_satdik', 60, 8);
+        $pdf->TextField('field_tgs_satdik', 60, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(40, 8, 'NIP                          : ');
-        $pdf->TextField('field_nip_satdik', 60, 8);
+        $pdf->TextField('field_nip_satdik', 60, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(40, 8, 'Satuan Pendidikan  : ');
-        $pdf->TextField('field_satdik', 60, 8);
+        $pdf->TextField('field_satdik', 60, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(40, 8, 'Alamat                    :');
-        $pdf->TextField('field_tgs', 100, 8);
+        $pdf->TextField('field_tgs', 140, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
+
+        $pdf->Ln(10); // Baris baru dengan jarak 10 unit
+        $pdf->Cell(40, 8, '');
+        $pdf->TextField('field_tgs', 140, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(15);
         $pdf->SetFont('times', 'B', 12);
@@ -71,22 +75,22 @@ class PdfController extends Controller
         $pdf->SetFont('times', 12);
 
         $pdf->Cell(70, 8, 'Nama Penyedia                                : ');
-        $pdf->TextField('field_nm_penyedia', 60, 8);
+        $pdf->TextField('field_nm_penyedia', 60, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(70, 8, 'Nama Badan Hukum (Jika Ada)      : ');
-        $pdf->TextField('field_bdn_hukum', 60, 8);
+        $pdf->TextField('field_bdn_hukum', 60, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(70, 8, 'Jabatan                                             : ');
-        $pdf->TextField('field_jabatan', 60, 8);
+        $pdf->TextField('field_jabatan', 60, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(70, 8, 'Alamat                                             :');
-        $pdf->TextField('field_almt_penyedia', 100, 8);
+        $pdf->TextField('field_almt_penyedia', 100, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(15); // Baris baru dengan jarak 10 unit
         $pdf->SetFont('times', 'B', 12);
@@ -99,9 +103,9 @@ class PdfController extends Controller
 
         $txt = '1. Para pihak telah melakukan kerjasama pengadaan barang dengan Nomor Pesanan';
         $pdf->MultiCell(0, 8, $txt, 0, 'J');
-        $pdf->TextField('field_nmr_psn', 60, 8);
+        $pdf->TextField('field_nmr_psn', 60, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
         $pdf->Cell(45, 8, 'yang dibuat pada tanggal ');
-        $pdf->TextField('field_tgl_psn', 45, 8);
+        $pdf->TextField('field_tgl_psn', 45, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
         $pdf->Cell(50, 8, '  dengan  rincian');
         $pdf->Ln(8);
         $pdf->Cell(0, 8, 'seluruh pesanan: (harap isi dengan rincian dalam surat pesanan)');
@@ -113,10 +117,7 @@ class PdfController extends Controller
         $pdf->ComboBox('menerima_barang1', 16, 6, array(array('blm', 'belum'), array('t', 'telah')));
         $pdf->Cell(60, 6, 'menerima barang tersebut dalam keadaan utuh dan baik.');
 
-        $pdf->SetMargins(15, 25, 15, 20); // Set left, top, and right margins to 15 mm
-        // Tambahkan halaman baru
-        $pdf->AddPage();
-
+        $pdf->Ln(12);
         $txt = '<span style="text-align: justify; line-height: 1.5">3. Bahwa penyedia telah memberikan masa dan waktu pelunasan pembayaran pesanan dengan membayar ke rekening Mitra dengan nomor rekening</span>';
         $posYBeforeHTML = $pdf->GetY();
         // Tambahkan teks ke PDF dengan format HTML
@@ -131,7 +132,7 @@ class PdfController extends Controller
         $pdf->SetXY($textFieldX, $textFieldY);
 
         // Tambahkan textfield di samping teks HTML
-        $pdf->TextField('field_nmr_rek', 65, 6);
+        $pdf->TextField('field_nmr_rek', 65, 6, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '...............................'));
 
         $pdf->Ln(12);
         $txt = '<span style="text-align: justify;">4. Bahwa Satuan Pendidikan</span>';
@@ -165,11 +166,11 @@ Barang & Qty):');
 
         $pdf->Ln(8);
         $pdf->Cell(26, 5, '');
-        $pdf->TextField('field_rnc1', 120, 6);
+        $pdf->TextField('field_rnc1', 120, 6, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '..................................'));
 
         $pdf->Ln(9);
         $pdf->Cell(26, 5, '');
-        $pdf->TextField('field_rnc2', 120, 6);
+        $pdf->TextField('field_rnc2', 120, 6, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '..................................'));
 
         $pdf->Ln(12);
         $pdf->Cell(55, 6, '5. Bahwa Satuan Pendidikan tidak melakukan pembayaran akibat: (tandai alasan yang benar)');
@@ -233,7 +234,7 @@ Barang & Qty):');
         $pdf->Cell(20, 5, '');
         $pdf->CheckBox('lainnya', 5, false, array(), array(), 'OK');
         $pdf->Cell(18, 5, 'Lainnya');
-        $pdf->TextField('field_lainnya', 80, 6);
+        $pdf->TextField('field_lainnya', 80, 6, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '..................................'));
 
         $pdf->Ln(12);
         $txt = '<span style="text-align: justify; line-height: 1.5;"><b>6. Atas pesanan yang tidak dilakukan pembayaran, maka kedua belah pihak sepakat untuk</b></span><span style="text-align: justify; line-height: 1.5;"><b>melakukan pembatalan pesanan.</b> Dalam hal pesanan sudah diterima oleh Satuan Pendidikan, maka</span><span style="line-height: 1.5;">Satuan Pendidikan melakukan pengembalian</span>';
@@ -303,12 +304,12 @@ Barang & Qty):');
 
         // Tentukan posisi X dan Y untuk textfield
         $textFieldX = $posXAfterHTML + 65; // Sesuaikan posisi X dengan kebutuhan
-        $textFieldY = $posYBeforeHTML + 5;
+        $textFieldY = $posYBeforeHTML + 6;
 
         // Set posisi untuk menambahkan textfield
         $pdf->SetXY($textFieldX, $textFieldY);
-        $pdf->TextField('field_nmr_psn', 60, 6);
-        $pdf->Ln(6);
+        $pdf->TextField('field_nmr_psn', 60, 6, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '..................................'));
+        $pdf->Ln(8);
         $txt = 'Tanggal';
         $posYBeforeHTML = $pdf->GetY();
         // Tambahkan teks ke PDF dengan format HTML
@@ -320,7 +321,7 @@ Barang & Qty):');
 
         // Set posisi untuk menambahkan textfield
         $pdf->SetXY($textFieldX, $textFieldY);
-        $pdf->TextField('field_tgl', 45, 6);
+        $pdf->TextField('field_tgl', 45, 6, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '..................................'));
         $pdf->Cell(10, 5, 'yang telah dibuat sebelumnya');
 
         $pdf->Ln(15);
@@ -466,5 +467,10 @@ Barang & Qty):');
 
         // Lakukan hal-hal lain sesuai kebutuhan, seperti memberikan hasil PDF sebagai respons
         return response()->file($outputPdfPath);
+    }
+
+    public function create_table()
+    {
+        return view('table');
     }
 }

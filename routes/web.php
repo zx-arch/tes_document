@@ -18,3 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/generate-pdf', [PdfController::class, 'generatePdf']);
+Route::get('/create-table', [PdfController::class, 'create_table']);
