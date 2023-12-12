@@ -42,10 +42,13 @@
                                 <button type="submit" class="btn btn-primary mb-2">Upload</button>
                                 <br>
                                 <span>* file harus PDF</span><br>
-                                <span>* max ukuran upload 300 KB</span>
+                                <span>* max ukuran upload 300 KB</span><br>
+                                <span>* file upload terakhir akan digunakan</span>
                             </form>
                             @if (Session::has('add_document_success'))
                                 <p class="text-success fw-bold mt-2">{{ Session::get('add_document_success') }}</p>
+                            @elseif (Session::has('update_document_success'))
+                                <p class="text-warning fw-bold mt-2">{{ Session::get('update_document_success') }}</p>
                             @endif
                         </div>
                     </div>

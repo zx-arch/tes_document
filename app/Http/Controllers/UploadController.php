@@ -19,16 +19,32 @@ class UploadController extends Controller
                     $fileContent = file_get_contents($file->getRealPath());
 
                     if ($request->select_form == 'skpt') {
-                        // Menyimpan data ke dalam database
-                        PembatalanTransaksiModel::create([
-                            'username' => 'user_a',
-                            'nama_document' => $file->getClientOriginalName(),
-                            'file' => $fileContent,
-                        ]);
-                    }
+                        $username = 'user_a';
+                        $skptDocuments = PembatalanTransaksiModel::getDocumentsForUser($username);
+                        if (sizeof($skptDocuments) == 0) {
+                            // Menyimpan data ke dalam database
+                            PembatalanTransaksiModel::create([
+                                'username' => 'user_a',
+                                'nama_document' => $file->getClientOriginalName(),
+                                'file' => $fileContent,
+                            ]);
+                            return redirect('/upload')->with('add_document_success', 'Berhasil menambahkan document');
+                        } else {
+                            try {
+                                PembatalanTransaksiModel::where('id', $request->id)
+                                    ->where('kode_document', $request->kode_document)
+                                    ->update([
+                                        'nama_document' => $file->getClientOriginalName(),
+                                        'file' => file_get_contents($file->getRealPath())
+                                    ]);
 
-                    // Jika Anda ingin mengakses kode_document setelah insert
-                    return redirect('/upload')->with('add_document_success', 'Berhasil menambahkan document');
+                                return redirect('/upload')->with('update_document_success', 'Berhasil mengupdate document');
+
+                            } catch (\Exception $e) {
+                                dd($e->getMessage());
+                            }
+                        }
+                    }
                 } catch (QueryException $e) {
                     $errorInfo = $e->errorInfo;
 
