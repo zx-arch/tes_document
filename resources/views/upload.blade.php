@@ -43,7 +43,7 @@
                                 <br>
                                 <span>* file harus PDF</span><br>
                                 <span>* max ukuran upload 300 KB</span><br>
-                                <span>* file upload terakhir akan digunakan</span>
+                                <span>* jika ada salah file, harap upload ulang. File yang telah berhasil terupload dapat dilihat di halaman history</span>
                             </form>
                             @if (Session::has('add_document_success'))
                                 <p class="text-success fw-bold mt-2">{{ Session::get('add_document_success') }}</p>
