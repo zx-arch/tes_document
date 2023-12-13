@@ -423,7 +423,7 @@ Barang & Qty):');
     public function generatePdf()
     {
         // Path untuk menyimpan hasil PDF yang dihasilkan
-        $outputPdfPath = storage_path('app/results/output.pdf');
+        $outputPdfPath = storage_path('app/results/surat_kesepakatan_pembatalan_transaksi.pdf');
 
         // Inisialisasi objek TCPDF dari FPDI
         $pdf = new Fpdi(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
