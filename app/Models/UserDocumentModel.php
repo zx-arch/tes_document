@@ -18,7 +18,7 @@ class UserDocumentModel extends Model
     ];
     protected $hidden = [];
 
-    public static function getSKPTDocumentsForUser($username, $jenis_document)
+    public static function getSpesificDocumentsForUser($username, $jenis_document)
     {
         return self::where('username', $username)
             ->where('jenis_document', $jenis_document)

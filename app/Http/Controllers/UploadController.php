@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PembatalanTransaksiModel;
 use App\Models\UserDocumentModel;
 use Illuminate\Database\QueryException;
 
@@ -19,32 +18,30 @@ class UploadController extends Controller
                 try {
                     $fileContent = file_get_contents($file->getRealPath());
 
-                    if ($request->select_form == 'Surat Kesepakatan Pembatalan Transaksi') {
-                        $username = 'user_a';
-                        $skptDocuments = UserDocumentModel::getSKPTDocumentsForUser($username, $request->select_form);
-                        if (sizeof($skptDocuments) == 0) {
-                            // Menyimpan data ke dalam database
-                            UserDocumentModel::create([
-                                'username' => 'user_a',
-                                'jenis_document' => $request->select_form,
-                                'nama_document' => $file->getClientOriginalName(),
-                                'file' => $fileContent,
-                            ]);
-                            return redirect('/upload')->with('add_document_success', 'Berhasil menambahkan document');
-                        } else {
-                            try {
-                                UserDocumentModel::where('username', 'user_a')
-                                    ->where('jenis_document', $request->select_form)
-                                    ->update([
-                                        'nama_document' => $file->getClientOriginalName(),
-                                        'file' => file_get_contents($file->getRealPath())
-                                    ]);
+                    $username = 'user_a';
+                    $skptDocuments = UserDocumentModel::getSpesificDocumentsForUser($username, $request->select_form);
+                    if (sizeof($skptDocuments) == 0) {
+                        // Menyimpan data ke dalam database
+                        UserDocumentModel::create([
+                            'username' => 'user_a',
+                            'jenis_document' => $request->select_form,
+                            'nama_document' => $file->getClientOriginalName(),
+                            'file' => $fileContent,
+                        ]);
+                        return redirect('/upload')->with('add_document_success', 'Berhasil menambahkan document');
+                    } else {
+                        try {
+                            UserDocumentModel::where('username', 'user_a')
+                                ->where('jenis_document', $request->select_form)
+                                ->update([
+                                    'nama_document' => $file->getClientOriginalName(),
+                                    'file' => file_get_contents($file->getRealPath())
+                                ]);
 
-                                return redirect('/upload')->with('update_document_success', 'Berhasil mengupdate document');
+                            return redirect('/upload')->with('update_document_success', 'Berhasil mengupdate document');
 
-                            } catch (\Exception $e) {
-                                dd($e->getMessage());
-                            }
+                        } catch (\Exception $e) {
+                            dd($e->getMessage());
                         }
                     }
                 } catch (QueryException $e) {

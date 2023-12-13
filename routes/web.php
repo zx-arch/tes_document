@@ -25,14 +25,10 @@ Route::get('/', function () {
 Route::get('/upload', function () {
     return view('upload');
 });
-
 Route::post('/upload/document', [UploadController::class, 'upload']);
+
 Route::get('/pembatalan_transaksi/generate-pdf', [PembatalanTransaksiController::class, 'generatePDF']);
 Route::get('/surat_pemesanan/generate-pdf', [SuratPemesananController::class, 'generatePDF']);
-
-Route::get('/table', function () {
-    return view('table');
-});
 
 Route::get('/history', [HistoryController::class, 'index']);
 Route::post('history/download_document_upload', [HistoryController::class, 'DownloadDocumentUpload']);
