@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use setasign\Fpdi\Tcpdf\Fpdi;
+use App\Http\Controllers\PdfController;
 
 class SuratPemesananController extends Controller
 {
+    public function __construct()
+    {
+        $this->general_pdf = new PdfController();
+    }
     private function textSurat($pdf)
     {
-        $pageWidth = $pdf->getPageWidth();
-        $pageHeight = $pdf->getPageHeight();
-
-        // Set rectangle dimensions
-        $rectWidth = 175;
-        $rectHeight = 257;
-
-        // Calculate x-coordinate to center the rectangle horizontally
-        $xCoordinate = ($pageWidth - $rectWidth) / 2;
-        $pdf->Rect($xCoordinate, 15, $rectWidth, $rectHeight, 'D');
+        $this->general_pdf->createBingkai($pdf);
 
         // Set posisi untuk menambahkan textfield
         $pdf->SetXY(7.5, 15);

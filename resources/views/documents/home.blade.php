@@ -10,12 +10,13 @@
                 <h6 class="p-2 mb-2 mt-2">Template Lampiran</h6>
                 <p class="p-2">KAK CR 2.3 Permendikbudristek no.18 Tahun 2023</p>
                 <ul class="list-group">
-
                     <li class="list-group-item"><a href="{{ url('berita_acara_negosiasi/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Document Berita Acara Negosiasi</a></li>
 
-                    <li class="list-group-item"><a href="{{ url('pembatalan_transaksi/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Surat Kesepakatan Pembatalan Transaksi</a></li>
-
                     <li class="list-group-item"><a href="{{url('surat_pemesanan/generate-pdf')}}" target="_blank" rel="noopener noreferrer">Surat Pemesanan</a></li>
+
+                    <li class="list-group-item"><a href="{{ url('berita_acara_serah_terima/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Berita Acara Serah Terima</a></li>
+
+                    <li class="list-group-item"><a href="{{ url('pembatalan_transaksi/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Surat Kesepakatan Pembatalan Transaksi</a></li>
                 </ul>
             </div>
         </div>

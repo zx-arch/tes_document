@@ -22,8 +22,9 @@
                                     <select class="form-select" aria-label="Default select example" name="select_form" required>
                                         <option value="" disabled selected>Pilih Jenis Document</option>
                                         <option value="Document Berita Acara Negosiasi">Document Berita Acara Negosiasi</option>
-                                        <option value="Surat Kesepakatan Pembatalan Transaksi">Surat Kesepakatan Pembatalan Transaksi</option>
                                         <option value="Surat Pemesanan">Surat Pemesanan</option>
+                                        <option value="Berita Acara Serah Terima">Berita Acara Serah Terima</option>
+                                        <option value="Surat Kesepakatan Pembatalan Transaksi">Surat Kesepakatan Pembatalan Transaksi</option>
                                     </select><br>
 
                                     <input class="form-control" name="document" type="file" id="formFile" accept=".pdf" required>
