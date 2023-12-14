@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PembatalanTransaksiController;
-use App\Http\Controllers\DocumentTransaksiController;
+use App\Http\Controllers\BeritaAcaraNegosiasiController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SuratPemesananController;
@@ -29,6 +29,7 @@ Route::post('/upload/document', [UploadController::class, 'upload']);
 
 Route::get('/pembatalan_transaksi/generate-pdf', [PembatalanTransaksiController::class, 'generatePDF']);
 Route::get('/surat_pemesanan/generate-pdf', [SuratPemesananController::class, 'generatePDF']);
+Route::get('/berita_acara_negosiasi/generate-pdf', [BeritaAcaraNegosiasiController::class, 'generatePDF']);
 
 Route::get('/history', [HistoryController::class, 'index']);
 Route::post('history/download_document_upload', [HistoryController::class, 'DownloadDocumentUpload']);

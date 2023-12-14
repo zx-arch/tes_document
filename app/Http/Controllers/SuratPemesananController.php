@@ -140,7 +140,7 @@ class SuratPemesananController extends Controller
         // Set font for data
 
         foreach ($sample_data as $row) {
-            for ($i = 0; $i < 6; $i++) {
+            for ($i = 0; $i < count($row); $i++) {
                 $uniqueId = uniqid();
                 $fieldName = 'field_lst' . $uniqueId . '_' . $i;
                 $pdf->SetLineStyle(array('width' => 0.2, 'cap' => 'butt', 'join' => 'miter', 'solid' => 255, 'color' => array(255, 255, 255)));

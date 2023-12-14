@@ -72,11 +72,11 @@ class PembatalanTransaksiController extends Controller
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
 
         $pdf->Cell(40, 8, 'Alamat                    :');
-        $pdf->TextField('field_tgs', 140, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
+        $pdf->TextField('field_almt1', 140, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(10); // Baris baru dengan jarak 10 unit
         $pdf->Cell(40, 8, '');
-        $pdf->TextField('field_tgs', 140, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
+        $pdf->TextField('field_almt2', 140, 8, array('multiline' => true, 'lineWidth' => 0, 'borderStyle' => 'none', 'textSize' => 0, 'value' => '....................'));
 
         $pdf->Ln(15);
         $pdf->SetFont('times', 'B', 12);
@@ -403,7 +403,7 @@ Barang & Qty):');
         // Set font for data
 
         foreach ($sample_data as $row) {
-            for ($i = 0; $i < 6; $i++) {
+            for ($i = 0; $i < count($row); $i++) {
                 $uniqueId = uniqid();
                 $fieldName = 'field_lst' . $uniqueId . '_' . $i;
                 $pdf->SetLineStyle(array('width' => 0.2, 'cap' => 'butt', 'join' => 'miter', 'solid' => 255, 'color' => array(255, 255, 255)));

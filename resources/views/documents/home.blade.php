@@ -8,7 +8,10 @@
             </div>
             <div class="containers p-2">
                 <h6 class="p-2 mb-2 mt-2">Template Lampiran</h6>
+                <p class="p-2">KAK CR 2.3 Permendikbudristek no.18 Tahun 2023</p>
                 <ul class="list-group">
+
+                    <li class="list-group-item"><a href="{{ url('berita_acara_negosiasi/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Document Berita Acara Negosiasi</a></li>
 
                     <li class="list-group-item"><a href="{{ url('pembatalan_transaksi/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Surat Kesepakatan Pembatalan Transaksi</a></li>
 
