@@ -21,6 +21,8 @@
                     <li class="list-group-item"><a href="{{ url('invoice/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Invoice</a></li>
 
                     <li class="list-group-item"><a href="{{ url('pembatalan_transaksi/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Surat Kesepakatan Pembatalan Transaksi</a></li>
+                    
+                    <li class="list-group-item"><a href="{{ url('permohonan_perubahan_perpajakan/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Surat Permohonan Perubahan Data Perpajakan Proforma Invoice / Invoice</a></li>
                 </ul>
             </div>
         </div>

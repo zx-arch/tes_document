@@ -27,6 +27,7 @@
                                         <option value="Proforma Invoice">Proforma Invoice</option>
                                         <option value="Invoice">Invoice</option>
                                         <option value="Surat Kesepakatan Pembatalan Transaksi">Surat Kesepakatan Pembatalan Transaksi</option>
+                                        <option value="Surat Permohonan Perubahan Data Perpajakan Proforma Invoice / Invoice">Surat Permohonan Perubahan Data Perpajakan Proforma Invoice / Invoice</option>
                                     </select><br>
 
                                     <input class="form-control" name="document" type="file" id="formFile" accept=".pdf" required>
