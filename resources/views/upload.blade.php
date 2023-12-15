@@ -24,6 +24,8 @@
                                         <option value="Document Berita Acara Negosiasi">Document Berita Acara Negosiasi</option>
                                         <option value="Surat Pemesanan">Surat Pemesanan</option>
                                         <option value="Berita Acara Serah Terima">Berita Acara Serah Terima</option>
+                                        <option value="Proforma Invoice">Proforma Invoice</option>
+                                        <option value="Invoice">Invoice</option>
                                         <option value="Surat Kesepakatan Pembatalan Transaksi">Surat Kesepakatan Pembatalan Transaksi</option>
                                     </select><br>
 

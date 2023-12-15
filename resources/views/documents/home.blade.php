@@ -16,6 +16,10 @@
 
                     <li class="list-group-item"><a href="{{ url('berita_acara_serah_terima/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Berita Acara Serah Terima</a></li>
 
+                    <li class="list-group-item"><a href="{{ url('proforma_invoice/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Proforma Invoice</a></li>
+
+                    <li class="list-group-item"><a href="{{ url('invoice/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Invoice</a></li>
+
                     <li class="list-group-item"><a href="{{ url('pembatalan_transaksi/generate-pdf') }}" target="_blank" rel="noopener noreferrer">Surat Kesepakatan Pembatalan Transaksi</a></li>
                 </ul>
             </div>

@@ -7,6 +7,8 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SuratPemesananController;
 use App\Http\Controllers\BeritaAcaraSerahTerimaController;
+use App\Http\Controllers\ProformaInvoiceController;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,8 @@ Route::get('/pembatalan_transaksi/generate-pdf', [PembatalanTransaksiController:
 Route::get('/surat_pemesanan/generate-pdf', [SuratPemesananController::class, 'generatePDF']);
 Route::get('/berita_acara_negosiasi/generate-pdf', [BeritaAcaraNegosiasiController::class, 'generatePDF']);
 Route::get('/berita_acara_serah_terima/generate-pdf', [BeritaAcaraSerahTerimaController::class, 'generatePDF']);
+Route::get('/proforma_invoice/generate-pdf', [ProformaInvoiceController::class, 'generatePDF']);
+Route::get('/invoice/generate-pdf', [InvoiceController::class, 'generatePDF']);
 
 Route::get('/history', [HistoryController::class, 'index']);
 Route::post('history/download_document_upload', [HistoryController::class, 'DownloadDocumentUpload']);
