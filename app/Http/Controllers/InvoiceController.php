@@ -11,14 +11,14 @@ class InvoiceController extends Controller
     {
         $this->general_pdf = new PdfController();
     }
-    private function createBingkai($pdf)
+    private function createBingkai($pdf, $width = 180, $height = 247)
     {
 
         $pageWidth = $pdf->getPageWidth();
 
         // Set rectangle dimensions
-        $rectWidth = 180;
-        $rectHeight = 165;
+        $rectWidth = $width;
+        $rectHeight = $height;
 
         // Calculate x-coordinate to center the rectangle horizontally
         $xCoordinate = ($pageWidth - $rectWidth) / 2;
@@ -291,7 +291,7 @@ class InvoiceController extends Controller
         }
         $pdf->AddPage();
         $pdf->SetMargins(15, 15, 15);
-        $this->createBingkai($pdf);
+        $this->createBingkai($pdf, 180, 165);
         $pdf->SetFont('times', 'B', 11);
         $pdf->Ln(10);
 
