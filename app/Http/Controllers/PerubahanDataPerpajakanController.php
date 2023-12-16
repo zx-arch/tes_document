@@ -118,34 +118,34 @@ class PerubahanDataPerpajakanController extends Controller
 
         $pdf->Ln(4);
         $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 6);
-        $pdf->Cell(5, 6, 'Atas salah satu/seluruh kondisi tersebut kami butuh memperbarui informasi pada dokumen', 0, 0, 'L');
+        $pdf->Cell(5, 6, 'Atas  salah  satu / seluruh  kondisi  tersebut  kami  butuh  memperbarui  informasi  pada dokumen', 0, 0, 'L');
         $pdf->Ln();
         $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 1);
-        $pdf->Cell(5, 6, 'proforma invoice/invoice transaksi yang sudah teridentifikasi. Untuk kebutuhan pembaharuan', 0, 0, 'L');
+        $pdf->Cell(5, 6, 'proforma  invoice / invoice  transaksi  yang  sudah teridentifikasi. Untuk kebutuhan pembaharuan', 0, 0, 'L');
         $pdf->Ln();
         $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 1);
-        $pdf->Cell(5, 6, 'ini, kami memohon diberikan data perpajakan berupa NPWP Satuan Pendidikan yang terbaru', 0, 0, 'L');
+        $pdf->Cell(5, 6, 'ini, kami  memohon  diberikan  data  perpajakan  berupa  NPWP  Satuan Pendidikan yang terbaru', 0, 0, 'L');
         $pdf->Ln();
         $pdf->SetXY($pdf->GetX(), $pdf->GetY() + 1);
         $pdf->Cell(5, 6, 'untuk yang data sebagai berikut:', 0, 0, 'L');
 
-        $pdf->Ln(12);
+        $pdf->Ln(13);
 
         $pdf->Cell(2.5, 8, '');
-        $pdf->SetXY($pdf->getX() - 1, $pdf->GetY());
+        $pdf->SetXY($pdf->getX() + 3, $pdf->GetY());
         $pdf->Cell(77.5, 15, '', 1, 0, 'L');
 
         $pdf->Cell(5, 8, '');
         $pdf->Ln(5);
-        $pdf->SetXY(19, $pdf->GetY() - 4);
+        $pdf->SetXY(23, $pdf->GetY() - 4);
         $pdf->Cell(12, 8, 'Transaksi yang teridentifikasi memenuhi', 0, 0, 'L');
         $pdf->Ln(4);
-        $pdf->SetXY(45, $pdf->GetY() + 1);
+        $pdf->SetXY(52, $pdf->GetY() + 1);
         $pdf->Cell(12, 8, 'kondisi', 0, 0, 'L');
 
         $pdf->Cell(2.5, 8, '');
-        $pdf->SetXY(94, $pdf->GetY() - 6);
-        $pdf->Cell(87.5, 15, '', 1, 0, 'L');
+        $pdf->SetXY(98, $pdf->GetY() - 6);
+        $pdf->Cell(77.5, 15, '', 1, 0, 'L');
 
         $pdf->Cell(5, 8, '');
         $pdf->SetXY(105, $pdf->GetY() + 1);
@@ -154,6 +154,101 @@ class PerubahanDataPerpajakanController extends Controller
         $pdf->SetXY(114, $pdf->GetY() + 1);
         $pdf->Cell(12, 8, 'yang butuh pembaharuan', 0, 0, 'L');
 
+        $pdf->Ln(8);
+
+        $pdf->Cell(2.5, 8, '');
+        $pdf->SetXY($pdf->GetX() + 3, $pdf->GetY() + 1);
+        $pdf->Cell(38.75, 20, '', 1, 0, 'L');
+
+        $pdf->Cell(5, 8, '');
+        $pdf->SetXY(33, $pdf->GetY() + 1);
+        $pdf->Cell(10, 8, 'Nomor', 0, 0, 'L');
+        $pdf->Ln(4);
+        $pdf->SetXY(22, $pdf->GetY() + 1);
+        $pdf->Cell(12, 8, 'Invoice / Proforma', 0, 0, 'L');
+        $pdf->Ln(4);
+        $pdf->SetXY(32, $pdf->GetY() + 1);
+        $pdf->Cell(12, 8, 'Invoice', 0, 0, 'L');
+
+        $pdf->Cell(2.5, 8, '');
+        $pdf->SetXY($pdf->GetX() + 12.8, $pdf->GetY() - 11);
+        $pdf->Cell(38.75, 20, '', 1, 0, 'L');
+        $pdf->Cell(5, 8, '');
+        $pdf->SetXY(62, $pdf->GetY() + 6);
+        $pdf->Cell(10, 8, 'transaction_mpid', 0, 0, 'L');
+
+        $pdf->Cell(2.5, 8, '');
+        $pdf->SetXY($pdf->GetX() + 23.5, $pdf->GetY() - 6);
+        $pdf->Cell(38.75, 20, '', 1, 0, 'L');
+        $pdf->Cell(5, 8, '');
+        $pdf->SetXY(99, $pdf->GetY() + 6);
+        $pdf->Cell(10, 8, 'Nama Sekolah', 0, 0, 'L');
+
+        $pdf->Cell(2.5, 8, '');
+        $pdf->SetXY($pdf->GetX() + 25.2, $pdf->GetY() - 6);
+        $pdf->Cell(38.75, 20, '', 1, 0, 'L');
+        $pdf->Cell(5, 8, '');
+        $pdf->SetXY(144, $pdf->GetY() + 6);
+        $pdf->Cell(10, 8, 'NPSN', 0, 0, 'L');
+
+        $pdf->Ln(8);
+
+        $pdf->Cell(4, 8, '');
+        $pdf->SetXY($pdf->GetX() + 1.5, $pdf->GetY() + 6);
+        $pdf->Cell(38.75, 8, '', 1, 0, 'L');
+
+        $pdf->Cell(8, 8, '');
+        $pdf->SetXY(20.5, $pdf->GetY());
+        $pdf->TextField('field_no_invoice', 38.75, 8, array('value' => '..........'));
+
+        $pdf->Cell(2.5, 8, '');
+        $pdf->SetXY($pdf->GetX() - 2.5, $pdf->GetY());
+        $pdf->Cell(38.75, 8, '', 1, 0, 'L');
+        $pdf->Cell(5, 8, '');
+        $pdf->SetXY(59.3, $pdf->GetY());
+        $pdf->TextField('field_transaction_mpid', 38.75, 8, array('value' => '..........'));
+
+        $pdf->Cell(2.5, 8, '');
+        $pdf->SetXY($pdf->GetX() - 2.5, $pdf->GetY());
+        $pdf->Cell(38.75, 8, '', 1, 0, 'L');
+        $pdf->Cell(5, 8, '');
+        $pdf->SetXY(98, $pdf->GetY());
+        $pdf->TextField('field_nm_sekolah', 38.75, 8, array('value' => '..........'));
+
+        $pdf->Cell(2.5, 8, '');
+        $pdf->SetXY($pdf->GetX() - 2.5, $pdf->GetY());
+        $pdf->Cell(38.75, 8, '', 1, 0, 'L');
+        $pdf->Cell(5, 8, '');
+        $pdf->SetXY(136.7, $pdf->GetY());
+        $pdf->TextField('field_transaction_mpid', 38.75, 8, array('value' => '..........'));
+
+        $pdf->Ln(8);
+        $pdf->SetXY($pdf->GetX() + 2, $pdf->GetY() + 6);
+        $pdf->Cell(5, 6, 'Demikian permohonan kami, atas perhatian dan kerjasamanya kami ucapkan terima kasih.', 0, 0, 'L');
+
+        $pdf->Ln(12);
+
+        $pdf->Cell(2.5, 8, '');
+        $pdf->SetXY(92, $pdf->GetY());
+        $pdf->Cell(87.5, 35, '', 0, 0, 'L');
+
+        $pdf->Cell(5, 8, '');
+        $pdf->SetXY(75, $pdf->GetY());
+        $pdf->SetFont('times', 'B', 12);
+        $pdf->Cell(20, 8, 'Mitra Marketplace SIPLah', 0, 0, 'L');
+        $pdf->SetXY(128, $pdf->GetY() + 1);
+        $pdf->TextField('field_mitra_siplah', 50, 6, array('value' => '[Nama PT............]'));
+
+
+        $pdf->Ln(12);
+        $pdf->SetFont('times', 'I', 10);
+        $pdf->SetXY(170, $pdf->GetY() + 1);
+        $pdf->Cell(20, 8, 'Ttd', 0, 0, 'L');
+
+        $pdf->Ln(13);
+        $pdf->SetFont('times', 12);
+        $pdf->SetXY(113, $pdf->GetY() + 1);
+        $pdf->TextField('field_nama_jabatan', 65, 6, array('value' => '(Nama dan Jabatan)'));
     }
 
     public function generatePdf()
