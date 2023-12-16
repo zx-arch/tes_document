@@ -47,7 +47,7 @@
                                 <button type="submit" class="btn-submit btn btn-primary mb-2" style="display: block;">Upload</button>
                                 <br>
                                 <span>* file harus PDF</span><br>
-                                <span>* max ukuran upload 300 KB</span><br>
+                                <span>* max ukuran upload 600 KB</span><br>
                                 <span>* jika ada salah file, harap upload ulang. File yang telah berhasil terupload dapat dilihat di halaman history</span>
                             </form>
                             @if (Session::has('add_document_success'))
@@ -81,7 +81,7 @@
         // Mengecek apakah file yang dipilih adalah PDF
         if (selectedFile && selectedFile.type === 'application/pdf') {
             // Membaca file dan menetapkan sumber gambar ke pratinjau
-            if (selectedFile.size <= 307200) {
+            if (selectedFile.size <= 614400) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     pdfPreview.style.display = 'block';

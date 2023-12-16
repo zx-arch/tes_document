@@ -13,7 +13,7 @@ class UploadController extends Controller
     {
         $file = $request->file('document');
         if ($file->getMimeType() == 'application/pdf') {
-            if ($file->getSize() <= 307200) {
+            if ($file->getSize() <= 614400) {
 
                 try {
                     $fileContent = file_get_contents($file->getRealPath());
