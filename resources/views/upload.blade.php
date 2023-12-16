@@ -7,7 +7,7 @@
                 <h1 class="h4 p-2">Upload Document</h1>
             </div>
             
-            <div class="containers p-2">
+            <div class="containers p-2" style="display: none;" id="main-content">
             
                 <div class="card border border-success mt-3" id="card-document">
                     <div class="card-header bg-success">
@@ -64,8 +64,14 @@
                 </div>
             </div>
 
+            <noscript>
+                <div class="alert alert-warning mt-3" role="alert">
+                    JavaScript dinonaktifkan. Aktifkan JavaScript untuk menggunakan fungsionalitas penuh.
+                </div>
+            </noscript>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('main-content').style.display = 'block';
     // Mendapatkan elemen input file
     const fileInput = document.getElementById('formFile');
 
