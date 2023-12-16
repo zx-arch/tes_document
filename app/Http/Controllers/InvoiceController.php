@@ -18,7 +18,7 @@ class InvoiceController extends Controller
 
         // Set rectangle dimensions
         $rectWidth = 180;
-        $rectHeight = 247;
+        $rectHeight = 165;
 
         // Calculate x-coordinate to center the rectangle horizontally
         $xCoordinate = ($pageWidth - $rectWidth) / 2;
