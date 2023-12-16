@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use setasign\Fpdi\Tcpdf\Fpdi;
+use Illuminate\Support\Facades\Cache;
 
 class BeritaAcaraNegosiasiController extends Controller
 {
@@ -50,6 +51,7 @@ class BeritaAcaraNegosiasiController extends Controller
 
         $pdf->Ln(10);
         $pdf->SetFont('times', 12);
+
         $header = array('No', 'Nama Produk', 'Qty', 'Harga Penawaran', 'Harga Negosiasi', 'Keterangan');
         $columnWidths = array(10, 50, 10, 40, 40, 30);
 
@@ -144,50 +146,70 @@ class BeritaAcaraNegosiasiController extends Controller
     }
     public function generatePdf()
     {
-        // Path untuk menyimpan hasil PDF yang dihasilkan
         $outputPdfPath = storage_path('app/results/berita_acara_negosiasi.pdf');
 
-        // Inisialisasi objek TCPDF dari FPDI
-        $pdf = new Fpdi(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetTitle('Document Berita Acara Negosiasi');  // Judul dokumen
+        $cacheKey = 'pdf_cache_' . uniqid();
+        try {
+            // Mengecek apakah PDF sudah ada di cache
+            if (Cache::has($cacheKey)) {
+                $pdfOutput = Cache::get($cacheKey);
+                return response($pdfOutput, 200, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="berita_acara_negosiasi.pdf"'
+                ]);
+            }
+            $outputPdfPath = storage_path('app/results/berita_acara_negosiasi.pdf');
 
-        $pdf->Cell(0, 10, 'Document Berita Acara Negosiasi', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+            // Inisialisasi objek TCPDF dari FPDI
+            $pdf = new Fpdi(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            $pdf->SetTitle('Document Berita Acara Negosiasi');  // Judul dokumen
 
-        // remove default header/footer
-        $pdf->setPrintHeader(false);
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-        // set default monospaced font
-        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+            $pdf->Cell(0, 10, 'Document Berita Acara Negosiasi', 0, false, 'C', 0, '', 0, false, 'M', 'M');
 
-        // set margins
-        $pdf->SetMargins(15, 15, 15); // Set left, top, and right margins to 15 mm
+            // remove default header/footer
+            $pdf->setPrintHeader(false);
+            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+            // set default monospaced font
+            $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-        // set auto page breaks
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+            // set margins
+            $pdf->SetMargins(15, 15, 15); // Set left, top, and right margins to 15 mm
 
-        // set image scale factor
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+            // set auto page breaks
+            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
-        // set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
-            require_once(dirname(__FILE__) . '/lang/eng.php');
-            $pdf->setLanguageArray($l);
+            // set image scale factor
+            $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+            // set some language-dependent strings (optional)
+            if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+                require_once(dirname(__FILE__) . '/lang/eng.php');
+                $pdf->setLanguageArray($l);
+            }
+
+            // ---------------------------------------------------------
+
+            // set font
+            $pdf->SetFont('times', 'B', 14);
+
+            // add a page
+            $pdf->AddPage();
+
+            $this->textSurat($pdf);
+
+            // Simpan hasil PDF
+            $pdfOutput = $pdf->Output('', 'S');
+            Cache::put($cacheKey, $pdfOutput, now()->addHours(9999));
+
+            return response(Cache::get($cacheKey), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="berita_acara_negosiasi.pdf"'
+            ]);
+
+        } catch (\Exception $e) {
+            // Tangani kesalahan caching
+            // Contoh: Log kesalahan atau kembalikan respons dengan pesan kesalahan
+            return response("Gagal menyimpan ke cache: " . $e->getMessage(), 500);
         }
-
-        // ---------------------------------------------------------
-
-        // set font
-        $pdf->SetFont('times', 'B', 14);
-
-        // add a page
-        $pdf->AddPage();
-
-        $this->textSurat($pdf);
-
-        // Simpan hasil PDF
-        $pdf->Output($outputPdfPath, 'F');
-
-        // Lakukan hal-hal lain sesuai kebutuhan, seperti memberikan hasil PDF sebagai respons
-        return response()->file($outputPdfPath);
     }
 }

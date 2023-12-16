@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use setasign\Fpdi\Tcpdf\Fpdi;
 use App\Http\Controllers\PdfController;
+use Illuminate\Support\Facades\Cache;
 
 class InvoiceController extends Controller
 {
@@ -30,7 +31,7 @@ class InvoiceController extends Controller
         $txt = 'INVOICE';
         $pdf->MultiCell(0, 0, $txt, 0, 'L', false);
 
-        $imagePath = public_path('img/siplah_icon.png');
+        $imagePath = public_path('img/siplah_icon.jpg');
 
         // Tentukan posisi dan ukuran gambar
         $x = $pdf->GetX() + 140; // Ganti dengan koordinat X yang diinginkan
@@ -43,6 +44,7 @@ class InvoiceController extends Controller
     }
     private function textSurat($pdf)
     {
+        //echo ;
         $this->createBingkai($pdf);
         $pdf->Ln(8);
         $pdf->SetFont('times', 'B', 12);
@@ -383,47 +385,65 @@ class InvoiceController extends Controller
         // Path untuk menyimpan hasil PDF yang dihasilkan
         $outputPdfPath = storage_path('app/results/invoice.pdf');
 
-        // Inisialisasi objek TCPDF dari FPDI
-        $pdf = new Fpdi(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetTitle('Invoice');  // Judul dokumen
+        $cacheKey = 'pdf_cache_' . uniqid();
+        try {
+            // Mengecek apakah PDF sudah ada di cache
+            if (Cache::has($cacheKey)) {
+                $pdfOutput = Cache::get($cacheKey);
+                return response($pdfOutput, 200, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="invoice.pdf"'
+                ]);
+            }
+            $pdf = new Fpdi(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            $pdf->SetTitle('Invoice');  // Judul dokumen
 
-        $pdf->Cell(0, 10, 'Invoice', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Cell(0, 10, 'Invoice', 0, false, 'C', 0, '', 0, false, 'M', 'M');
 
-        // remove default header/footer
-        $pdf->setPrintHeader(false);
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-        // set default monospaced font
-        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+            // remove default header/footer
+            $pdf->setPrintHeader(false);
+            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+            // set default monospaced font
+            $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-        // set margins
-        $pdf->SetMargins(15, 15, 15); // Set left, top, and right margins to 15 mm
+            // set margins
+            $pdf->SetMargins(15, 15, 15); // Set left, top, and right margins to 15 mm
 
-        // set auto page breaks
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+            // set auto page breaks
+            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
-        // set image scale factor
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+            // set image scale factor
+            $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-        // set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
-            require_once(dirname(__FILE__) . '/lang/eng.php');
-            $pdf->setLanguageArray($l);
+            // set some language-dependent strings (optional)
+            if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+                require_once(dirname(__FILE__) . '/lang/eng.php');
+                $pdf->setLanguageArray($l);
+            }
+
+            // ---------------------------------------------------------
+
+            // set font
+            $pdf->SetFont('times', 'B', 14);
+
+            // add a page
+            $pdf->AddPage();
+
+            $this->textSurat($pdf);
+
+            // Simpan hasil PDF
+            $pdfOutput = $pdf->Output('', 'S');
+            Cache::put($cacheKey, $pdfOutput, now()->addHours(9999));
+
+            return response(Cache::get($cacheKey), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="invoice.pdf"'
+            ]);
+
+        } catch (\Exception $e) {
+            // Tangani kesalahan caching
+            // Contoh: Log kesalahan atau kembalikan respons dengan pesan kesalahan
+            return response("Gagal menyimpan ke cache: " . $e->getMessage(), 500);
         }
-
-        // ---------------------------------------------------------
-
-        // set font
-        $pdf->SetFont('times', 'B', 14);
-
-        // add a page
-        $pdf->AddPage();
-
-        $this->textSurat($pdf);
-
-        // Simpan hasil PDF
-        $pdf->Output($outputPdfPath, 'F');
-
-        // Lakukan hal-hal lain sesuai kebutuhan, seperti memberikan hasil PDF sebagai respons
-        return response()->file($outputPdfPath);
     }
 }

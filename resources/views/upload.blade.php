@@ -8,7 +8,6 @@
             </div>
             
             <div class="containers p-2" style="display: none;" id="main-content">
-            
                 <div class="card border border-success mt-3" id="card-document">
                     <div class="card-header bg-success">
                         <span>Lengkapi Form dibawah</span>
@@ -47,7 +46,7 @@
                                 <button type="submit" class="btn-submit btn btn-primary mb-2" style="display: block;">Upload</button>
                                 <br>
                                 <span>* file harus PDF</span><br>
-                                <span>* max ukuran upload 600 KB</span><br>
+                                <span>* max ukuran upload 500 KB</span><br>
                                 <span>* jika ada salah file, harap upload ulang. File yang telah berhasil terupload dapat dilihat di halaman history</span>
                             </form>
                             @if (Session::has('add_document_success'))
@@ -69,52 +68,51 @@
                     JavaScript dinonaktifkan. Aktifkan JavaScript untuk menggunakan fungsionalitas penuh.
                 </div>
             </noscript>
+        </div>
+
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('main-content').style.display = 'block';
-    // Mendapatkan elemen input file
-    const fileInput = document.getElementById('formFile');
+                const fileInput = document.getElementById('formFile');
+                // Mendapatkan elemen pratinjau gambar
+                const pdfPreview = document.getElementById('pdfPreview');
+                const filename = document.getElementById('filename');
 
-    // Mendapatkan elemen pratinjau gambar
-    const pdfPreview = document.getElementById('pdfPreview');
-    const filename = document.getElementById('filename');
-
-    // Menambahkan event change pada input file
-    fileInput.addEventListener('change', function (event) {
-        // Mendapatkan file yang dipilih
-        const selectedFile = event.target.files[0];
-        console.log(selectedFile);
-        // Mengecek apakah file yang dipilih adalah PDF
-        if (selectedFile && selectedFile.type === 'application/pdf') {
-            // Membaca file dan menetapkan sumber gambar ke pratinjau
-            if (selectedFile.size <= 614400) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    pdfPreview.style.display = 'block';
-                    filename.style.display = 'block';
-                    filename.innerHTML = selectedFile.name;
-                    pdfPreview.src = "{{ asset('img/pdf_icon.png')}}";
-                    document.querySelector('.btn-submit').style.display = 'block';
-                };
-                reader.readAsDataURL(selectedFile);
-            } else {
-                filename.style.display = 'block';
-                filename.classList.add('text-danger');
-                filename.style.fontWeight = 'bold';
-                filename.innerHTML = 'Ukuran PDF minimal 300 KB';
-                document.querySelector('.btn-submit').style.display = 'none';
-            }
-        } else {
-            // Menyembunyikan pratinjau jika file bukan PDF
-            pdfPreview.style.display = 'none';
-            filename.style.display = 'block';
-            filename.classList.add('text-danger');
-            filename.style.fontWeight = 'bold';
-            filename.innerHTML = 'Jenis file tidak diijinkan';
-            document.querySelector('.btn-submit').style.display = 'none';
-        }
-    });
-
-});
+                // Menambahkan event change pada input file
+                fileInput.addEventListener('change', function (event) {
+                    // Mendapatkan file yang dipilih
+                    const selectedFile = event.target.files[0];
+                    console.log(selectedFile);
+                    // Mengecek apakah file yang dipilih adalah PDF
+                    if (selectedFile && selectedFile.type === 'application/pdf') {
+                        // Membaca file dan menetapkan sumber gambar ke pratinjau
+                        if (selectedFile.size <= 614400) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                pdfPreview.style.display = 'block';
+                                filename.style.display = 'block';
+                                filename.innerHTML = selectedFile.name;
+                                pdfPreview.src = "{{ asset('img/pdf_icon.png')}}";
+                                document.querySelector('.btn-submit').style.display = 'block';
+                            };
+                            reader.readAsDataURL(selectedFile);
+                        } else {
+                            filename.style.display = 'block';
+                            filename.classList.add('text-danger');
+                            filename.style.fontWeight = 'bold';
+                            filename.innerHTML = 'Ukuran PDF minimal 300 KB';
+                            document.querySelector('.btn-submit').style.display = 'none';
+                        }
+                    } else {
+                        // Menyembunyikan pratinjau jika file bukan PDF
+                        pdfPreview.style.display = 'none';
+                        filename.style.display = 'block';
+                        filename.classList.add('text-danger');
+                        filename.style.fontWeight = 'bold';
+                        filename.innerHTML = 'Jenis file tidak diijinkan';
+                        document.querySelector('.btn-submit').style.display = 'none';
+                    }
+                });
+            });
         </script>
 @endsection

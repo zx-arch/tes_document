@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserDocumentModel;
+use Illuminate\Support\Facades\Cache;
 
 class HistoryController extends Controller
 {
     public function index()
     {
-        $getdata = UserDocumentModel::getAll('user_a');
+        $value = Cache::get('data_history', function () {
+            return UserDocumentModel::getAll('user_a');
+        });
         return view('history', [
-            'getdata' => $getdata
+            'getdata' => $value
         ]);
     }
     public function DownloadDocumentUpload(Request $request)
