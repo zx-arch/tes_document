@@ -396,7 +396,7 @@ class ProformaInvoiceController extends Controller
                 $pdfOutput = Cache::get($cacheKey);
                 return response($pdfOutput, 200, [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="proforma_invoice.pdf"'
+                    'Content-Disposition' => 'attachment; filename="proforma_invoice.pdf"'
                 ]);
             }
 
@@ -443,7 +443,7 @@ class ProformaInvoiceController extends Controller
 
             return response(Cache::get($cacheKey), 200, [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="proforma_invoice.pdf"'
+                'Content-Disposition' => 'attachment; filename="proforma_invoice.pdf"'
             ]);
 
         } catch (\Exception $e) {

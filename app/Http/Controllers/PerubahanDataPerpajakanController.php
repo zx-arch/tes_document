@@ -264,7 +264,7 @@ class PerubahanDataPerpajakanController extends Controller
                 $pdfOutput = Cache::get($cacheKey);
                 return response($pdfOutput, 200, [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="surat_perubahan_data_perpajakan.pdf"'
+                    'Content-Disposition' => 'attachment; filename="surat_perubahan_data_perpajakan.pdf"'
                 ]);
             }
             // $cacheKey = 'pdf_cache_' . uniqid();
@@ -316,7 +316,7 @@ class PerubahanDataPerpajakanController extends Controller
 
             return response(Cache::get($cacheKey), 200, [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="surat_perubahan_data_perpajakan.pdf"'
+                'Content-Disposition' => 'attachment; filename="surat_perubahan_data_perpajakan.pdf"'
             ]);
 
         } catch (\Exception $e) {

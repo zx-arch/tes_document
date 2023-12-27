@@ -432,7 +432,7 @@ Barang & Qty):');
                 $pdfOutput = Cache::get($cacheKey);
                 return response($pdfOutput, 200, [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="surat_kesepakatan_pembatalan_transaksi.pdf"'
+                    'Content-Disposition' => 'attachment; filename="surat_kesepakatan_pembatalan_transaksi.pdf"'
                 ]);
             }
             // Path untuk menyimpan hasil PDF yang dihasilkan
@@ -484,7 +484,7 @@ Barang & Qty):');
 
             return response(Cache::get($cacheKey), 200, [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="surat_kesepakatan_pembatalan_transaksi.pdf"'
+                'Content-Disposition' => 'attachment; filename="surat_kesepakatan_pembatalan_transaksi.pdf"'
             ]);
 
         } catch (\Exception $e) {

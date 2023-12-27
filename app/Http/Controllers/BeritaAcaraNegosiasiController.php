@@ -155,7 +155,7 @@ class BeritaAcaraNegosiasiController extends Controller
                 $pdfOutput = Cache::get($cacheKey);
                 return response($pdfOutput, 200, [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="berita_acara_negosiasi.pdf"'
+                    'Content-Disposition' => 'attachment; filename="berita_acara_negosiasi.pdf"'
                 ]);
             }
             $outputPdfPath = storage_path('app/results/berita_acara_negosiasi.pdf');
@@ -203,7 +203,7 @@ class BeritaAcaraNegosiasiController extends Controller
 
             return response(Cache::get($cacheKey), 200, [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="berita_acara_negosiasi.pdf"'
+                'Content-Disposition' => 'attachment; filename="berita_acara_negosiasi.pdf"'
             ]);
 
         } catch (\Exception $e) {

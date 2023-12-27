@@ -392,7 +392,7 @@ class InvoiceController extends Controller
                 $pdfOutput = Cache::get($cacheKey);
                 return response($pdfOutput, 200, [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="invoice.pdf"'
+                    'Content-Disposition' => 'attachment; filename="invoice.pdf"'
                 ]);
             }
             $pdf = new Fpdi(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -437,7 +437,7 @@ class InvoiceController extends Controller
 
             return response(Cache::get($cacheKey), 200, [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="invoice.pdf"'
+                'Content-Disposition' => 'attachment; filename="invoice.pdf"'
             ]);
 
         } catch (\Exception $e) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use setasign\Fpdi\Tcpdf\Fpdi;
 use App\Http\Controllers\PdfController;
+use Illuminate\Support\Facades\Cache;
 
 class SuratPemesananController extends Controller
 {
@@ -262,6 +263,14 @@ class SuratPemesananController extends Controller
     {
         // Path untuk menyimpan hasil PDF yang dihasilkan
         $outputPdfPath = storage_path('app/results/surat_pemesanan.pdf');
+        $cacheKey = 'pdf_cache_' . uniqid();
+        if (Cache::has($cacheKey)) {
+            $pdfOutput = Cache::get($cacheKey);
+            return response($pdfOutput, 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="proforma_invoice.pdf"'
+            ]);
+        }
 
         // Inisialisasi objek TCPDF dari FPDI
         $pdf = new Fpdi(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -301,9 +310,12 @@ class SuratPemesananController extends Controller
         $this->textSurat($pdf);
 
         // Simpan hasil PDF
-        $pdf->Output($outputPdfPath, 'F');
+        $pdfOutput = $pdf->Output('', 'S');
+        Cache::put($cacheKey, $pdfOutput, now()->addHours(9999));
 
-        // Lakukan hal-hal lain sesuai kebutuhan, seperti memberikan hasil PDF sebagai respons
-        return response()->file($outputPdfPath);
+        return response(Cache::get($cacheKey), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="surat_pemesanan.pdf"'
+        ]);
     }
 }
