@@ -10,7 +10,8 @@
 ## Get API Template Document
 
 1. Document Berita Acara Negosiasi
-/berita_acara_negosiasi/generate-pdf
+<br>
+<p>/berita_acara_negosiasi/generate-pdf</p>
 
 2. Document Surat Pemesanan
 /surat_pemesanan/generate-pdf
