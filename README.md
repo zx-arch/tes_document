@@ -31,4 +31,4 @@
 /permohonan_perubahan_perpajakan/generate-pdf
 
 contoh:
-https://example.com//surat_pemesanan/generate-pdf
+https://example.com/surat_pemesanan/generate-pdf
