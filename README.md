@@ -7,5 +7,25 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Database Document
-https://drive.google.com/file/d/1FObcUUzqyDEvel5GkyUcNisaxsiUKGBB/view?usp=sharing
+## Get API Template Document
+
+1. Document Berita Acara Negosiasi
+/berita_acara_negosiasi/generate-pdf
+
+2. Document Surat Pemesanan
+/surat_pemesanan/generate-pdf
+
+3. Berita Acara Serah Terima
+/berita_acara_serah_terima/generate-pdf
+
+4. Proforma Invoice
+/proforma_invoice/generate-pdf
+
+5. Invoice
+/invoice/generate-pdf
+
+6. Surat Kesepakatan Pembatalan Transaksi
+/pembatalan_transaksi/generate-pdf
+
+7. Surat Permohonan Perubahan Data Perpajakan Proforma Invoice / Invoice
+/permohonan_perubahan_perpajakan/generate-pdf
