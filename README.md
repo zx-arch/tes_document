@@ -29,3 +29,6 @@
 
 7. Surat Permohonan Perubahan Data Perpajakan Proforma Invoice / Invoice <br>
 /permohonan_perubahan_perpajakan/generate-pdf
+
+contoh:
+https://example.com//surat_pemesanan/generate-pdf
